@@ -1,0 +1,31 @@
+import pandas as pd
+orders=pd.read_table('http://bit.ly/chiporders',sep='|',header=None)
+orders.head()
+
+order_id 	quantity 	item_name 	choice_description 	item_price
+0 	1 	1 	Chips and Fresh Tomato Salsa 	NaN 	$2.39
+1 	1 	1 	Izze 	[Clementine] 	$3.39
+2 	1 	1 	Nantucket Nectar 	[Apple] 	$3.39
+3 	1 	1 	Chips and Tomatillo-Green Chili Salsa 	NaN 	$2.39
+4 	2 	2 	Chicken Bowl 	[Tomatillo-Red Chili Salsa (Hot), [Black Beans... 	$16.98
+
+user=['user_id','age','gender','occupation','Zip_code']
+pd.read_table('http://bit.ly/movieusers',sep='|',header=None,names=user)
+
+user_id 	age 	gender 	occupation 	Zip_code
+0 	1 	24 	M 	technician 	85711
+1 	2 	53 	F 	other 	94043
+2 	3 	23 	M 	writer 	32067
+3 	4 	24 	M 	technician 	43537
+4 	5 	33 	F 	other 	15213
+5 	6 	42 	M 	executive 	98101
+
+
+if you want to select your own file dynamicaly then you can use.
+
+import pandas as pd
+from tkinter import filedialog
+from tkinter import *
+root = Tk()
+root.filename =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
+orders=pd.read_table(root.filename,sep=',',header=None)
