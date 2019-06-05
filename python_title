@@ -1,0 +1,112 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Jun  5 10:18:42 2019
+
+@author: Dell
+"""
+"""
+import pandas as pd
+a=pd.read_excel(r'D:\python\image\print.xlsx',None)
+b=pd.read_excel(r'D:\python\image\print1.xlsx',None)
+for i in a:
+    for j in b:
+        if i==j:
+            name=i
+            name=pd.read_excel(r'D:\python\image\print.xlsx',i)
+        else:
+            print("No")
+       
+import copy
+import pandas as pd
+import numpy as np
+df = pd.DataFrame({'A':['-a',1,'a'], 
+               'B':['a',np.nan,'c'],
+               'ID':[1,2,2],
+                't':[pd.tslib.Timestamp.now(),pd.tslib.Timestamp.now(),
+                    np.nan]})
+df['YearMonth'] = df['t'].map(lambda x: 100*x.year + x.month)    
+
+dict_of_df = {}
+for ym in [201511, 201612, 201710]:
+
+    key_name = 'df_new_'+str(ym)    
+
+    dict_of_df[key_name] = copy.deepcopy(df)
+
+    to_change = df['YearMonth']< ym
+    dict_of_df[key_name].loc[to_change, 'new_col'] = ym   
+
+dict_of_df.keys()
+import datetime as dt 
+import pandas as pd
+date = dt.datetime.today().strftime("%m/%d/%Y")
+
+print(date)
+a=pd.read_excel(r'D:\python\image\print.xlsx')
+a.insert(loc=0, column='Date', value=date)
+
+from tkinter import Tk
+from tkinter import filedialog
+root=Tk()
+root.withdraw()
+file_dialog=filedialog.askopenfilename()
+print(file_dialog)
+"""
+import tkinter as tk
+window=tk.Tk()
+window.title("Windows Please select the files required")
+window.geometry('400x300')
+#lable
+title=tk.Label(text="Please Select the files")
+title.grid(column=0,row=0)
+button=tk.Button(text="Press to select the file")
+button.grid(column=0,row=1)
+entry_field=tk.Entry()
+entry_field.grid(column=0,row=2)
+text_filed=tk.Text(master=window,height=10,width=30)
+text_filed.grid()
+window.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
