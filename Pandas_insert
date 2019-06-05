@@ -1,0 +1,25 @@
+DataFrame.insert(loc, column, value, allow_duplicates=False)[source]
+Insert column into DataFrame at specified location.
+
+Raises a ValueError if column is already contained in the DataFrame, unless allow_duplicates is set to True.
+
+Parameters:	
+loc : int Insertion index. Must verify 0 <= loc <= len(columns)
+
+column : string, number, or hashable object label of the inserted column
+
+value : int, Series, or array-like allow_duplicates : bool, optional
+
+
+import datetime as dt 
+import pandas as pd
+date = dt.datetime.today().strftime("%m/%d/%Y")
+print(date)
+a=pd.read_excel(r'D:\python\image\print.xlsx')
+a.insert(loc=0, column='Date', value=date)
+
+
+
+
+
+
