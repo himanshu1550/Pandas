@@ -1,0 +1,124 @@
+
+
+import pandas as pd
+df_master=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx',None)
+df_support=pd.read_excel(r'C:\Users\742711\Documents\important\pandas_multiple1.xlsx',None)
+df_key_Application1=pd.read_excel(r'C:\Users\742711\Documents\important\Key Applications Performance view-31-May-2019.xlsx',sheet_name='Dashboard')
+df=df_key_Application1.iat[0,4]
+df_date=pd.to_datetime(df)
+
+writer = pd.ExcelWriter(r'C:\Users\742711\Documents\important\Master_file1.xlsx')
+for j in df_support:
+    if j=="AMS-SL-01":
+        df_AMS_SL_01=pd.read_excel(r'C:\Users\742711\Documents\important\pandas_multiple1.xlsx', sheet_name='AMS-SL-01')
+        df_AMS_SL_01_Master=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-01')
+        df_01=df_AMS_SL_01_Master.drop_duplicates(subset ="Date")
+        df_01=df_01['Date']
+        ab_01=[]
+        for k in df_01:
+            ab_01.append(k)
+            if df_date not in ab_01:
+                df_AMS_SL_01_Value=df_AMS_SL_01_Master.append(df_AMS_SL_01,ignore_index = True)
+        
+        
+        
+        
+        
+    elif j=="AMS-SL-02" :
+        df_AMS_SL_02=pd.read_excel(r'C:\Users\742711\Documents\important\pandas_multiple1.xlsx', sheet_name='AMS-SL-02')
+        df_AMS_SL_02_Master=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-02')
+        df_02=df_AMS_SL_02_Master.drop_duplicates(subset ="Date")
+        df_02=df_02['Date']
+        ab_02=[]
+        for k in df_02:
+            ab_02.append(k)
+            if df_date not in ab_02:
+                df_AMS_SL_02_Value=df_AMS_SL_02_Master.append(df_AMS_SL_02,ignore_index = True)
+                
+                
+                
+        
+    elif j=="AMS-SL-03" :
+        df_AMS_SL_03=pd.read_excel(r'C:\Users\742711\Documents\important\pandas_multiple1.xlsx', sheet_name='AMS-SL-03') 
+        df_AMS_SL_03_Master=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-03')
+        df_03=df_AMS_SL_03_Master.drop_duplicates(subset ="Date")
+        df_03=df_03['Date']
+        ab_03=[]
+        for k in df_03:
+            ab_03.append(k)
+            if df_date not in ab_03:        
+                df_AMS_SL_03_Value=df_AMS_SL_03_Master.append(df_AMS_SL_03,ignore_index = True)  
+                
+                
+           
+            
+    elif j=="AMS-SL-04" :
+        df_AMS_SL_04=pd.read_excel(r'C:\Users\742711\Documents\important\pandas_multiple1.xlsx', sheet_name='AMS-SL-04') 
+        df_AMS_SL_04_Master=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-04')
+        df_04=df_AMS_SL_04_Master.drop_duplicates(subset ="Date")
+        df_04=df_04['Date']
+        ab_04=[]
+        for k in df_04:
+            ab_04.append(k)
+            if df_date not in ab_04:
+                df_AMS_SL_04_Value=df_AMS_SL_04_Master.append(df_AMS_SL_04,ignore_index = True)   
+       
+       
+       
+       
+       
+        
+    elif j=="AMS-SL-05" :
+        df_AMS_SL_05=pd.read_excel(r'C:\Users\742711\Documents\important\pandas_multiple1.xlsx', sheet_name='AMS-SL-05')
+        df_AMS_SL_05_Master=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-05')
+        df_05=df_AMS_SL_05_Master.drop_duplicates(subset ="Date")
+        df_05=df_05['Date']
+        ab_05=[]
+        for k in df_05:
+            ab_05.append(k)
+            if df_date not in ab_05:
+                df_AMS_SL_05_Value=df_AMS_SL_05_Master.append(df_AMS_SL_05,ignore_index = True)
+                
+                
+                
+                
+                
+        
+    elif j=="AMS-SL-07" :
+        df_AMS_SL_07=pd.read_excel(r'C:\Users\742711\Documents\important\pandas_multiple1.xlsx', sheet_name='AMS-SL-07')
+        df_AMS_SL_07_Master=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-07')
+        df_07=df_AMS_SL_07_Master.drop_duplicates(subset ="Date")
+        df_07=df_07['Date']
+        ab_07=[]
+        for k in df_07:
+            ab_07.append(k)
+            if df_date not in ab_07:
+                df_AMS_SL_07_Value=df_AMS_SL_07_Master.append(df_AMS_SL_07,ignore_index = True)
+                
+                
+                
+        
+    elif j=="AMS-SL-09" :
+        df_AMS_SL_09=pd.read_excel(r'C:\Users\742711\Documents\important\pandas_multiple1.xlsx', sheet_name='AMS-SL-09')
+        df_AMS_SL_09_Master=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-09')
+        df_09=df_AMS_SL_09_Master.drop_duplicates(subset ="Date")
+        df_09=df_09['Date']
+        ab_09=[]
+        for k in df_09:
+            ab_09.append(k)
+            if df_date not in ab_09:
+                df_AMS_SL_09_Value=df_AMS_SL_09_Master.append(df_AMS_SL_09,ignore_index = True)
+       
+       
+       
+        
+    elif j=="AMS-SL-12" :
+        df_AMS_SL_12=pd.read_excel(r'C:\Users\742711\Documents\important\pandas_multiple1.xlsx', sheet_name='AMS-SL-12')
+        df_AMS_SL_12_Master=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-12')
+        df_12=df_AMS_SL_12_Master.drop_duplicates(subset ="Date")
+        df_12=df_12['Date']
+        ab_12=[]
+        for k in df_12:
+            ab_12.append(k)
+            if df_date not in ab_12:
+                df_AMS_SL_12_Value=df_AMS_SL_12_Master.append(df_AMS_SL_12,ignore_index = True)
