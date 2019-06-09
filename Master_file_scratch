@@ -1,0 +1,105 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jun  9 19:39:36 2019
+
+@author: Dell
+"""
+import pandas as pd
+Sheet_Master_All=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx',None)
+Sheet_AMS_SL_01=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-01')
+Sheet_AMS_SL_02=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-02')
+Sheet_AMS_SL_03=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-03')
+Sheet_AMS_SL_04=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-04')
+Sheet_AMS_SL_05=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-05')
+Sheet_AMS_SL_07=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-07')
+Sheet_AMS_SL_09=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-09')
+Sheet_AMS_SL_12=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-12')
+#*************************************************************************************************************
+#*************************************************************************************************************
+#********************************Masterfile all sheet stored at once in starting******************************
+#*************************************************************************************************************
+#*************************************************************************************************************
+
+
+
+df_key_Application=pd.read_excel(r'C:\Users\742711\Documents\important\AMS 2.0 INC Response and Resolution SLA_31-May-2019.xlsx',sheet_name='Dashboard', nrows=16, skiprows=2,index=False)
+df_key_Date=pd.read_excel(r'C:\Users\742711\Documents\important\AMS 2.0 INC Response and Resolution SLA_31-May-2019.xlsx',sheet_name='Dashboard')
+df=df_key_Date.iat[0,4]
+df_date=pd.to_datetime(df).date()
+df_key_required=df_key_Application[['Unnamed: 0','Unnamed: 1', 'Clinical']][df_key_Application.Clinical<1]
+df_key_required.columns=['SLA Metrics Code','Service Level Name','Clinical']
+df_SLA_required=df_key_required[(df_key_required['SLA Metrics Code'].isin(["AMS-SL-01","AMS-SL-02","AMS-SL-03","AMS-SL-04","AMS-SL-05","AMS-SL-07","AMS-SL-09","AMS-SL-12"]))]
+list_All_SLA=["AMS-SL-01","AMS-SL-02","AMS-SL-03","AMS-SL-04","AMS-SL-05","AMS-SL-07","AMS-SL-09","AMS-SL-12"]
+df4=df_SLA_required['SLA Metrics Code']
+#***************************Key_Application_Sheet_Value_less then 100% all SLA in DF4**************************
+#****************************Date from Key_Application_Excel_File**********************************************
+#**************************************************************************************************************
+
+
+df_AMS_INC=pd.read_excel(r'C:\Users\742711\Documents\important\AMS 2.0 INC Response and Resolution SLA_31-May-2019.xlsx',sheet_name='INC')
+df_STD_and_Non_STD=pd.read_excel(r'C:\Users\742711\Documents\important\STD and Non-STD SR SLA calculation-31-May-2019.xlsx',sheet_name='SR Dump')
+#*******************************Other Required Files for filtering data and output*****************************
+
+
+
+writer = pd.ExcelWriter(r'C:\Users\742711\Documents\important\Master_file.xlsx')
+
+for i in Sheet_master_All:  #***************** Loop form master_file ******************************************
+    if i ==list_All_SLA[0]:  #"AMS-SL-01"
+        
+        if "AMS-SL-01" in df4:
+            
+        else:
+            Sheet_AMS_SL_01.to_excel(writer, sheet_name='AMS-SL-01')#**** Store Previous Data "AMS-SL-01"
+    
+    elif i== list_All_SLA[1]: #"AMS-SL-02"
+        
+        if "AMS-SL-02" in df4:
+        
+        else:
+            Sheet_AMS_SL_02.to_excel(writer, sheet_name='AMS-SL-02')#**** Store Previous Data "AMS-SL-01" 
+            
+    elif i== list_All_SLA[2]: #"AMS-SL-03"
+        
+        if "AMS-SL-03" in df4:
+            
+        else:
+            Sheet_AMS_SL_03.to_excel(writer, sheet_name='AMS-SL-03')#**** Store Previous Data "AMS-SL-01"  
+            
+    elif i== list_All_SLA[3]: #"AMS-SL-04"
+        
+        if "AMS-SL-04" in df4:
+            
+        else:
+            Sheet_AMS_SL_04.to_excel(writer, sheet_name='AMS-SL-04')#**** Store Previous Data "AMS-SL-01"    
+            
+            
+    elif i== list_All_SLA[4]: #"AMS-SL-05"
+        if "AMS-SL-05" in df4:
+            
+        else:
+            Sheet_AMS_SL_05.to_excel(writer, sheet_name='AMS-SL-05')#**** Store Previous Data "AMS-SL-01"   
+            
+    elif i== list_All_SLA[5]: #"AMS-SL-07"
+        if "AMS-SL-07" in df4:
+            
+        else:
+            Sheet_AMS_SL_07.to_excel(writer, sheet_name='AMS-SL-07')#**** Store Previous Data "AMS-SL-01"
+            
+    elif i== list_All_SLA[6]: #"AMS-SL-09"
+        
+        if "AMS-SL-09" in df4:
+            
+        else:
+            Sheet_AMS_SL_09.to_excel(writer, sheet_name='AMS-SL-09')#**** Store Previous Data "AMS-SL-01"
+            
+    elif i== list_All_SLA[6]: #"AMS-SL-12"
+        
+        if "AMS-SL-12" in df4:
+            
+        else:
+            Sheet_AMS_SL_12.to_excel(writer, sheet_name='AMS-SL-12')#**** Store Previous Data "AMS-SL-01"    
+
+
+
+
