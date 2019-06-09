@@ -1,0 +1,239 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jun  9 19:39:36 2019
+
+@author: Dell
+"""
+import pandas as pd
+Sheet_Master_All=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx',None)
+Sheet_AMS_SL_01=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-01')
+Sheet_AMS_SL_02=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-02')
+Sheet_AMS_SL_03=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-03')
+Sheet_AMS_SL_04=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-04')
+Sheet_AMS_SL_05=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-05')
+Sheet_AMS_SL_07=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-07')
+Sheet_AMS_SL_09=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-09')
+Sheet_AMS_SL_12=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-12')
+#*************************************************************************************************************
+#*************************************************************************************************************
+#********************************Masterfile all sheet stored at once in starting******************************
+#*************************************************************************************************************
+#*************************************************************************************************************
+
+
+
+df_key_Application=pd.read_excel(r'C:\Users\742711\Documents\important\AMS 2.0 INC Response and Resolution SLA_31-May-2019.xlsx',sheet_name='Dashboard', nrows=16, skiprows=2,index=False)
+df_key_Date=pd.read_excel(r'C:\Users\742711\Documents\important\AMS 2.0 INC Response and Resolution SLA_31-May-2019.xlsx',sheet_name='Dashboard')
+df=df_key_Date.iat[0,4]
+df_date=pd.to_datetime(df).date()
+df_key_required=df_key_Application[['Unnamed: 0','Unnamed: 1', 'Clinical']][df_key_Application.Clinical<1]
+df_key_required.columns=['SLA Metrics Code','Service Level Name','Clinical']
+df_SLA_required=df_key_required[(df_key_required['SLA Metrics Code'].isin(["AMS-SL-01","AMS-SL-02","AMS-SL-03","AMS-SL-04","AMS-SL-05","AMS-SL-07","AMS-SL-09","AMS-SL-12"]))]
+list_All_SLA=["AMS-SL-01","AMS-SL-02","AMS-SL-03","AMS-SL-04","AMS-SL-05","AMS-SL-07","AMS-SL-09","AMS-SL-12"]
+df4=df_SLA_required['SLA Metrics Code']
+#***************************Key_Application_Sheet_Value_less then 100% all SLA in DF4**************************
+#****************************Date from Key_Application_Excel_File**********************************************
+#**************************************************************************************************************
+
+
+df_AMS_INC=pd.read_excel(r'C:\Users\742711\Documents\important\AMS 2.0 INC Response and Resolution SLA_31-May-2019.xlsx',sheet_name='INC')
+df_STD_and_Non_STD=pd.read_excel(r'C:\Users\742711\Documents\important\STD and Non-STD SR SLA calculation-31-May-2019.xlsx',sheet_name='SR Dump')
+#*******************************Other Required Files for filtering data and output*****************************
+
+
+
+writer = pd.ExcelWriter(r'C:\Users\742711\Documents\important\Master_file.xlsx')
+
+for i in Sheet_Master_All:  #***************** Loop form master_file ******************************************
+    if i ==list_All_SLA[0]:  #"AMS-SL-01"
+        if "AMS-SL-01" in df4:
+            df9_01=df_AMS_INC[(df_AMS_INC['Assignment group']=="TS-GLOB-L2-R&D CLINICAL") & (df_AMS_INC['Metal']=="Gold") & (df_AMS_INC['Response SLA']=="Not met")]
+            df9_01["Comments"]=""
+            df9_01.insert(loc=0, column='Date', value=df_date)
+            df9_01.set_index('Number',inplace=True)   #****"AMS-SL-01" Final Output**************
+            df09_01=Sheet_AMS_SL_01.drop_duplicates(subset ="Date")
+            df09_01=df09_01['Date']
+            Date_01=[]
+            for a in df09_01:
+                Date_01.append(a)
+                if df_date not in Date_01:
+                    df_AMS_SL_01_Value=Sheet_AMS_SL_01.append(df9_01,ignore_index = True)
+                    df_AMS_SL_01_Value.set_index('Number',inplace=True)
+                    df_AMS_SL_01_Value.to_excel(writer, sheet_name='AMS-SL-01') #***Append_with latest_values**
+                else:
+                    Sheet_AMS_SL_01.to_excel(writer, sheet_name='AMS-SL-01')#**** Store Previous Data "AMS-SL-01"
+
+        else:
+            Sheet_AMS_SL_01.to_excel(writer, sheet_name='AMS-SL-01')#**** Store Previous Data "AMS-SL-01"
+    
+    
+    
+    
+    elif i== list_All_SLA[1]: #"AMS-SL-02"
+        if "AMS-SL-02" in df4:
+            df9_02=df_AMS_INC[(df_AMS_INC['Assignment group']=="TS-GLOB-L2-R&D CLINICAL") & (df_AMS_INC['Metal']=="Silver") & (df_AMS_INC['Response SLA']=="Not met")]
+            df9_02["Comments"]=""
+            df9_02.insert(loc=0, column='Date', value=df_date)
+            df9_02.set_index('Number',inplace=True) #****"AMS-SL-02" Final Output**************
+            df09_02=Sheet_AMS_SL_02.drop_duplicates(subset ="Date")
+            df09_02=df09_02['Date']
+            Date_02=[]
+            for b in df09_02:
+                Date_02.append(b)
+                if df_date not in Date_02:
+                    df_AMS_SL_02_Value=Sheet_AMS_SL_02.append(df9_02,ignore_index = True)
+                    df_AMS_SL_02_Value.set_index('Number',inplace=True)
+                    df_AMS_SL_02_Value.to_excel(writer, sheet_name='AMS-SL-02')#***Append_with latest_values**
+                else:
+                    Sheet_AMS_SL_02.to_excel(writer, sheet_name='AMS-SL-02')#**** Store Previous Data "AMS-SL-02"
+
+        else:
+            Sheet_AMS_SL_02.to_excel(writer, sheet_name='AMS-SL-02')#**** Store Previous Data "AMS-SL-02" 
+            
+            
+            
+            
+    elif i== list_All_SLA[2]: #"AMS-SL-03"
+        if "AMS-SL-03" in df4:
+            df9_03=df_AMS_INC[(df_AMS_INC['Assignment group']=="TS-GLOB-L2-R&D CLINICAL") & (df_AMS_INC['Metal']=="Gold") & (df_AMS_INC['Resolution SLA']=="Not met")]
+            df9_03["Comments"]=""
+            df9_03.insert(loc=0, column='Date', value=df_date)
+            df9_03.set_index('Number',inplace=True) #****"AMS-SL-03" Final Output**************
+            df09_03=Sheet_AMS_SL_03.drop_duplicates(subset ="Date")
+            df09_03=df09_03['Date']
+            Date_03=[]
+            for c in df09_03:
+                Date_03.append(c)
+                if df_date not in Date_03:        
+                    df_AMS_SL_03_Value=Sheet_AMS_SL_03.append(df9_03,ignore_index = True)  
+                    df_AMS_SL_03_Value.set_index('Number',inplace=True)
+                    Sheet_AMS_SL_03.to_excel(writer, sheet_name='AMS-SL-03')#***Append_with latest_values**
+                else:
+                    Sheet_AMS_SL_03.to_excel(writer, sheet_name='AMS-SL-03')#**** Store Previous Data "AMS-SL-03"      
+                
+        else:
+            Sheet_AMS_SL_03.to_excel(writer, sheet_name='AMS-SL-03')#**** Store Previous Data "AMS-SL-03"  
+            
+            
+            
+            
+    elif i== list_All_SLA[3]: #"AMS-SL-04"
+        if "AMS-SL-04" in df4:
+            df9_04=df_AMS_INC[(df_AMS_INC['Assignment group']=="TS-GLOB-L2-R&D CLINICAL") & (df_AMS_INC['Metal']=="Silver") & (df_AMS_INC['Resolution SLA']=="Not met")]
+            df9_04["Comments"]=""
+            df9_04.insert(loc=0, column='Date', value=df_date)
+            df9_04.set_index('Number',inplace=True) #****"AMS-SL-04" Final Output**************
+            df09_04=Sheet_AMS_SL_04.drop_duplicates(subset ="Date")
+            df09_04=df09_04['Date']
+            Date_04=[]
+            for d in df09_04:
+                Date_04.append(d)
+                if df_date not in Date_04:
+                    df_AMS_SL_04_Value=Sheet_AMS_SL_04.append(df9_04,ignore_index = True)   
+                    df_AMS_SL_04_Value.set_index('Number',inplace=True)
+                    df_AMS_SL_04_Value.to_excel(writer, sheet_name='AMS-SL-04')#***Append_with latest_values**
+                else:
+                    Sheet_AMS_SL_04.to_excel(writer, sheet_name='AMS-SL-04')#**** Store Previous Data "AMS-SL-04"
+                    
+        else:
+            Sheet_AMS_SL_04.to_excel(writer, sheet_name='AMS-SL-04')#**** Store Previous Data "AMS-SL-04"    
+            
+            
+            
+            
+    elif i== list_All_SLA[4]: #"AMS-SL-05"
+        if "AMS-SL-05" in df4:
+            df9_05=df_AMS_INC[(df_AMS_INC['Assignment group']=="TS-GLOB-L2-R&D CLINICAL") & (df_AMS_INC['Backlog (resolved)?']=="Yes") & (df_AMS_INC['Resolution SLA']=="Not met")]
+            df9_05["Comments"]=""
+            df9_05.insert(loc=0, column='Date', value=df_date)
+            df9_05.set_index('Number',inplace=True) #****"AMS-SL-05" Final Output**************
+            df09_05=Sheet_AMS_SL_05.drop_duplicates(subset ="Date")
+            df09_05=df09_05['Date']
+            Date_05=[]
+            for e in df09_05:
+                Date_05.append(e)
+                if df_date not in Date_05:
+                    df_AMS_SL_05_Value=Sheet_AMS_SL_05.append(df9_05,ignore_index = True)
+                    df_AMS_SL_05_Value.set_index('Number',inplace=True)
+                    df_AMS_SL_05_Value.to_excel(writer, sheet_name='AMS-SL-05')#***Append_with latest_values**
+                else:
+                    Sheet_AMS_SL_05.to_excel(writer, sheet_name='AMS-SL-05')#**** Store Previous Data "AMS-SL-05"   
+                    
+        else:
+            Sheet_AMS_SL_05.to_excel(writer, sheet_name='AMS-SL-05')#**** Store Previous Data "AMS-SL-05"   
+            
+            
+            
+            
+    elif i== list_All_SLA[5]: #"AMS-SL-07"
+        if "AMS-SL-07" in df4:
+            df9_07=df_STD_and_Non_STD[(df_STD_and_Non_STD['RITM state']=="Closed Complete") & (df_STD_and_Non_STD['Standard / Non-Standard']=="Non-Standard") & (df_STD_and_Non_STD['STD / Non-STD SLA']=="Not met")]
+            df9_07["Comments"]=""
+            df9_07.insert(loc=0, column='Date', value=df_date)
+            df9_07.set_index('number',inplace=True) #****"AMS-SL-07" Final Output**************
+            df09_07=Sheet_AMS_SL_07.drop_duplicates(subset ="Date")
+            df09_07=df09_07['Date']
+            Date_07=[]
+            for g in df09_07:
+                Date_07.append(g)
+                if df_date not in Date_07:
+                    df_AMS_SL_07_Value=Sheet_AMS_SL_07.append(df9_07,ignore_index = True)
+                    df_AMS_SL_07_Value.set_index('number',inplace=True)
+                    df_AMS_SL_07_Value.to_excel(writer, sheet_name='AMS-SL-07')#***Append_with latest_values**
+                else:
+                    Sheet_AMS_SL_07.to_excel(writer, sheet_name='AMS-SL-07')#**** Store Previous Data "AMS-SL-07"          
+                      
+        else:
+            Sheet_AMS_SL_07.to_excel(writer, sheet_name='AMS-SL-07')#**** Store Previous Data "AMS-SL-07"
+            
+            
+            
+            
+    elif i== list_All_SLA[6]: #"AMS-SL-09"
+        if "AMS-SL-09" in df4:
+            df9_09=df_STD_and_Non_STD[(df_STD_and_Non_STD['RITM state']=="Closed Complete") & (df_STD_and_Non_STD['Standard / Non-Standard']=="Non-Standard") & (df_STD_and_Non_STD['GSC']=="Clinical")& (df_STD_and_Non_STD['Non-STD SLA']=="Not met")]
+            df9_09["Comments"]=""
+            df9_09.insert(loc=0, column='Date', value=df_date)
+            df9_09.set_index('number',inplace=True) #****"AMS-SL-09" Final Output**************
+            df09_09=Sheet_AMS_SL_09.drop_duplicates(subset ="Date")
+            df09_09=df09_09['Date']
+            Date_09=[]
+            for j in df09_09:
+                Date_09.append(j)
+                if df_date not in Date_09:
+                    df_AMS_SL_09_Value=Sheet_AMS_SL_09.append(df9_09,ignore_index = True)
+                    df_AMS_SL_09_Value.set_index('number',inplace=True)
+                    df_AMS_SL_09_Value.to_excel(writer, sheet_name='AMS-SL-09')#***Append_with latest_values**
+                else:
+                    Sheet_AMS_SL_09.to_excel(writer, sheet_name='AMS-SL-09')#**** Store Previous Data "AMS-SL-09"    
+            
+        else:
+            Sheet_AMS_SL_09.to_excel(writer, sheet_name='AMS-SL-09')#**** Store Previous Data "AMS-SL-09"
+            
+            
+            
+            
+    elif i== list_All_SLA[6]: #"AMS-SL-12"
+        if "AMS-SL-12" in df4:
+            df9_12=df_STD_and_Non_STD[(df_STD_and_Non_STD['RITM state'].isin(["Open","Work in Progress"])) & (df_STD_and_Non_STD['Prior to Go Live?'] !="Yes") & (df_STD_and_Non_STD['Business days Open based on due date - Aging'].isin(["10d-15d","15d-30d","30d-60d","> 60d"]))& (df_STD_and_Non_STD['GSC']=="Clinical") & (df_STD_and_Non_STD['Non-STD SLA']=="Not met")] 
+            df9_12["Comments"]=""
+            df9_12.insert(loc=0, column='Date', value=df_date)
+            df9_12.set_index('number',inplace=True) #****"AMS-SL-12" Final Output**************
+            df09_12=Sheet_AMS_SL_12.drop_duplicates(subset ="Date")
+            df09_12=df09_12['Date']
+            Date_12=[]
+            for m in df09_12:
+                Date_12.append(m)
+                if df_date not in Date_12:
+                    df_AMS_SL_12_Value=Sheet_AMS_SL_12.append(df9_12,ignore_index = True)
+                    df_AMS_SL_12_Value.set_index('number',inplace=True)
+                    df_AMS_SL_12_Value.to_excel(writer, sheet_name='AMS-SL-12')#***Append_with latest_values**
+                else:
+                    Sheet_AMS_SL_12.to_excel(writer, sheet_name='AMS-SL-12')#**** Store Previous Data "AMS-SL-12"        
+
+        else:
+            Sheet_AMS_SL_12.to_excel(writer, sheet_name='AMS-SL-12')#**** Store Previous Data "AMS-SL-12"    
+
+
+
+
