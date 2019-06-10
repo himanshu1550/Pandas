@@ -1,3 +1,8 @@
+#*** use df.empty ==true or False for testing the datafram is empty or not
+
+
+
+
 
 import pandas as pd
 Sheet_Master_All1=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx',None)
