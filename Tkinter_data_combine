@@ -1,0 +1,427 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Jun 10 09:31:26 2019
+
+@author: 742711
+"""
+
+import tkinter as tk
+
+from tkinter import filedialog as fd
+
+class Browse(tk.Frame):
+    """ Creates a frame that contains a button when clicked lets the user to select
+    a file and put its filepath into an entry.
+    """
+
+    def __init__(self, master, initialdir='', filetypes=()):
+        super().__init__(master)
+        self.filepath = tk.StringVar()
+        self._initaldir = initialdir
+        self._filetypes = filetypes
+        self._create_widgets()
+        self._display_widgets()
+        print(self.filepath)
+    def _create_widgets(self):
+        self._entry = tk.Entry(self, textvariable=self.filepath)
+        self._button = tk.Button(self, text="Browse.....the Key Applications Performance view.. ", command=self.browse)
+    def _display_widgets(self):
+        self._entry.pack(fill='x', expand=1)
+        self._button.pack(anchor='se')
+    def browse(self):
+        name=fd.askopenfilename(initialdir=self._initaldir,filetypes=self._filetypes)
+        self.filepath.set(name)
+        global name_print
+        name_print=name
+class Browse1(tk.Frame):
+    def __init__(self, master, initialdir='', filetypes=()):
+        super().__init__(master)
+        self.filepath = tk.StringVar()
+        self._initaldir = initialdir
+        self._filetypes = filetypes
+        self._create_widgets()
+        self._display_widgets()
+    def _create_widgets(self):
+        self._entry = tk.Entry(self, textvariable=self.filepath)
+        self._button = tk.Button(self, text="Browse...the AMS 2.0 INC Response and Resolution..", command=self.browse)
+
+    def _display_widgets(self):
+        self._entry.pack(fill='x', expand=1)
+        self._button.pack(anchor='se')
+    def browse(self):
+        name1=fd.askopenfilename(initialdir=self._initaldir,filetypes=self._filetypes)
+        self.filepath.set(name1)
+        global name_print1
+        name_print1=name1
+class Browse2(tk.Frame):
+    def __init__(self, master, initialdir='', filetypes=()):
+        super().__init__(master)
+        self.filepath = tk.StringVar()
+        self._initaldir = initialdir
+        self._filetypes = filetypes
+        self._create_widgets()
+        self._display_widgets()
+    def _create_widgets(self):
+        self._entry = tk.Entry(self, textvariable=self.filepath)
+        self._button = tk.Button(self, text="Browse...the STD and Non-STD SR SLA calculation..", command=self.browse)
+    def _display_widgets(self):
+        self._entry.pack(fill='x', expand=1)
+        self._button.pack(anchor='se')    
+    def browse(self):
+        name2=fd.askopenfilename(initialdir=self._initaldir,filetypes=self._filetypes)
+        self.filepath.set(name2)
+        global name_print2
+        name_print2=name2
+if __name__ == '__main__':
+    root = tk.Tk()
+    file_browser = Browse(root, initialdir=r"C:\Users",filetypes=(('Excel file_only','*.xlsx'),("All files", "*.*")))
+    file_browser1 = Browse1(root, initialdir=r"C:\Users",filetypes=(('Excel file_only','*.xlsx'),("All files", "*.*")))
+    file_browser2 = Browse2(root, initialdir=r"C:\Users",filetypes=(('Excel file_only','*.xlsx'),("All files", "*.*")))
+    file_browser.pack(fill='x', expand=True)
+    file_browser1.pack(fill='x', expand=True)
+    file_browser2.pack(fill='x', expand=True)
+    root.mainloop()
+import sys
+
+if (("Key Applications Performance view" in name_print) and ("AMS 2.0 INC Response and Resolution" in name_print1 ) and ("STD and Non-STD SR SLA calculation" in name_print2 )):   
+    Key_Date=name_print[-16:-5]
+    AMS_Date=name_print1[-16:-5]
+    STD_Date=name_print2[-16:-5]
+    list=[Key_Date,AMS_Date,STD_Date]
+    date=[]
+    for i in list:
+        import pandas as pd
+        df=pd.to_datetime(i)
+        date.append(df)
+    #day=pd.Timedelta('1 days')
+   # if date[0]-date[1]==day:
+     #   print(Key_Date,AMS_Date,STD_Date)
+      #  df_key_Application=pd.read_excel(name_print,sheet_name='Dashboard', nrows=16, skiprows=2,index=False)
+      #  df_key_Date=pd.read_excel(name_print,sheet_name='Dashboard')
+   # else:
+        #sys.exit("Date failure please check the file you have selected")
+       # print("Date failure please check the file you have selected")
+    
+else:
+    print("invalid file select") 
+    sys.exit("invalid file select")
+
+
+
+
+
+
+import pandas as pd
+Sheet_Master_All1=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx',None)
+Sheet_Master_All=[]
+for master in Sheet_Master_All1:
+    Sheet_Master_All.append(master)
+Sheet_AMS_SL_01=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-01')
+
+Sheet_AMS_SL_02=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-02')
+
+Sheet_AMS_SL_03=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-03')
+
+Sheet_AMS_SL_04=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-04')
+
+Sheet_AMS_SL_05=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-05')
+
+Sheet_AMS_SL_07=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-07')
+
+Sheet_AMS_SL_09=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-09')
+
+Sheet_AMS_SL_12=pd.read_excel(r'C:\Users\742711\Documents\important\Master_file.xlsx', sheet_name='AMS-SL-12')
+
+
+#Sheet_AMS_SL_01.set_index('Number',inplace=True)
+#Sheet_AMS_SL_02.set_index('Number',inplace=True)
+#Sheet_AMS_SL_03.set_index('Number',inplace=True)
+#Sheet_AMS_SL_04.set_index('Number',inplace=True)
+#Sheet_AMS_SL_05.set_index('Number',inplace=True)
+#Sheet_AMS_SL_07.set_index('number',inplace=True)
+#Sheet_AMS_SL_09.set_index('number',inplace=True)
+#Sheet_AMS_SL_12.set_index('number',inplace=True)
+#*************************************************************************************************************
+#*************************************************************************************************************
+#********************************Masterfile all sheet stored at once in starting******************************
+#*************************************************************************************************************
+#*************************************************************************************************************
+
+
+
+df_key_Application=pd.read_excel(name_print,sheet_name='Dashboard', nrows=16, skiprows=2,index=False)
+df_key_Date=pd.read_excel(name_print,sheet_name='Dashboard')
+df=df_key_Date.iat[0,4]
+df_date= pd.to_datetime(df)
+df_key_required=df_key_Application[['Unnamed: 0','Unnamed: 1', 'Clinical']][df_key_Application.Clinical<1]
+df_key_required.columns=['SLA Metrics Code','Service Level Name','Clinical']
+df_SLA_required=df_key_required[(df_key_required['SLA Metrics Code'].isin(["AMS-SL-01","AMS-SL-02","AMS-SL-03","AMS-SL-04","AMS-SL-05","AMS-SL-07","AMS-SL-09","AMS-SL-12"]))]
+list_All_SLA=["AMS-SL-01","AMS-SL-02","AMS-SL-03","AMS-SL-04","AMS-SL-05","AMS-SL-07","AMS-SL-09","AMS-SL-12"]
+df04=df_SLA_required['SLA Metrics Code']
+df4=[]
+for pk in df04:
+    df4.append(pk)
+#***************************Key_Application_Sheet_Value_less then 100% all SLA in DF4**************************
+#****************************Date from Key_Application_Excel_File**********************************************
+#**************************************************************************************************************
+
+
+df_AMS_INC=pd.read_excel(name_print1,sheet_name='INC')
+#df_AMS_INC.set_index('Number',inplace=True)
+df_STD_and_Non_STD=pd.read_excel(name_print2,sheet_name='SR Dump')
+#*******************************Other Required Files for filtering data and output*****************************
+
+
+
+writer = pd.ExcelWriter(r'C:\Users\742711\Documents\important\Master_file.xlsx',engine = 'xlsxwriter')
+
+for i in Sheet_Master_All:  #***************** Loop form master_file ******************************************
+    if i ==list_All_SLA[0]:  #"AMS-SL-01"
+        if "AMS-SL-01" in df4:
+            df9_01=df_AMS_INC[(df_AMS_INC['Assignment group']=="TS-GLOB-L2-R&D CLINICAL") & (df_AMS_INC['Metal']=="Gold") & (df_AMS_INC['Response SLA']=="Not met")]
+            df9_01["Comments"]=""
+            df9_01.insert(loc=1, column='Date', value=df_date)
+            df09_01=Sheet_AMS_SL_01.drop_duplicates(subset ="Date")
+            df09_01=df09_01['Date']
+            Date_01=[]
+            if (df9_01.empty) or (df9_01.empty and df09_01.empty):
+                Sheet_AMS_SL_01.to_excel(writer, sheet_name='AMS-SL-01')
+            elif (df9_01.empty==False and df09_01.empty):
+                df9_01.set_index('Number',inplace=True)
+                print("Master file empty_ but current file have data-SL-01")
+                df9_01.to_excel(writer,sheet_name='AMS-SL-01')    
+            else:
+                for a in df09_01:
+                    df_date1=pd.to_datetime(a)
+                    Date_01.append(df_date1)
+                if df_date not in Date_01:
+                    df_AMS_SL_01_Value=Sheet_AMS_SL_01.append(df9_01,ignore_index = True,sort=False)
+                    df_AMS_SL_01_Value.to_excel(writer, sheet_name='AMS-SL-01',index=False) #***Append_with latest_values**
+                else:
+                    Sheet_AMS_SL_01.to_excel(writer, sheet_name='AMS-SL-01')#**** Store Previous Data "AMS-SL-01"
+
+        else:
+            Sheet_AMS_SL_01.to_excel(writer, sheet_name='AMS-SL-01')#**** Store Previous Data "AMS-SL-01"
+    
+    
+    
+    
+    elif i== list_All_SLA[1]: #"AMS-SL-02"
+        if "AMS-SL-02" in df4:
+            df9_02=df_AMS_INC[(df_AMS_INC['Assignment group']=="TS-GLOB-L2-R&D CLINICAL") & (df_AMS_INC['Metal']=="Silver") & (df_AMS_INC['Response SLA']=="Not met")]
+            df9_02["Comments"]=""
+            df9_02.insert(loc=1, column='Date', value=df_date)
+            df09_02=Sheet_AMS_SL_02.drop_duplicates(subset ="Date")
+            df09_02=df09_02['Date']
+            Date_02=[]
+            if (df9_02.empty) or (df9_02.empty and df09_02.empty):
+                Sheet_AMS_SL_02.to_excel(writer, sheet_name='AMS-SL-02')
+            elif (df9_02.empty==False and df09_02.empty):
+                print("Master file empty_ but current file have data-SL-02")
+                df9_02.to_excel(writer,sheet_name='AMS-SL-02')    
+            else:
+                for b in df09_02:
+                    df_date2=pd.to_datetime(b)
+                    Date_02.append(df_date2)
+                if df_date not in Date_02:
+                    print("fall")
+                    df_AMS_SL_02_Value=Sheet_AMS_SL_02.append(df9_02,ignore_index = True,sort=False)
+                    df_AMS_SL_02_Value.to_excel(writer, sheet_name='AMS-SL-02')#***Append_with latest_values**
+                else:
+                    Sheet_AMS_SL_02.to_excel(writer, sheet_name='AMS-SL-02')#**** Store Previous Data "AMS-SL-02"
+
+        else:
+            Sheet_AMS_SL_02.to_excel(writer, sheet_name='AMS-SL-02')#**** Store Previous Data "AMS-SL-02" 
+            
+            
+            
+            
+    elif i== list_All_SLA[2]: #"AMS-SL-03"
+        if "AMS-SL-03" in df4:
+            df9_03=df_AMS_INC[(df_AMS_INC['Assignment group']=="TS-GLOB-L2-R&D CLINICAL") & (df_AMS_INC['Metal']=="Gold") & (df_AMS_INC['Resolution SLA']=="Not met")]
+            df9_03["Comments"]=""
+            df9_03.insert(loc=1, column='Date', value=df_date)
+            df09_03=Sheet_AMS_SL_03.drop_duplicates(subset ="Date")
+            df09_03=df09_03['Date']
+            Date_03=[]
+            if (df9_03.empty) or (df9_03.empty and df09_03.empty):
+                Sheet_AMS_SL_03.to_excel(writer, sheet_name='AMS-SL-03')
+            elif (df9_03.empty==False and df09_03.empty):
+                print("Master file empty_ but current file have data-SL-03")
+                df9_03.to_excel(writer,sheet_name='AMS-SL-03')
+                
+            else:
+                for c in df09_03:
+                    df_date3=pd.to_datetime(c)
+                    Date_03.append(df_date3)
+                if df_date not in Date_03:
+                       print("fall")
+                       df_AMS_SL_03_Value=Sheet_AMS_SL_03.append(df9_03,ignore_index = True,sort=False)  
+                       df_AMS_SL_03_Value.to_excel(writer, sheet_name='AMS-SL-03')#***Append_with latest_values**
+                       print("OK3")
+                else:
+                       print("Date. present")
+                       Sheet_AMS_SL_03.to_excel(writer, sheet_name='AMS-SL-03')#**** Store Previous Data "AMS-SL-03"      
+                
+        else:
+            Sheet_AMS_SL_03.to_excel(writer, sheet_name='AMS-SL-03')#**** Store Previous Data "AMS-SL-03"  
+            
+            
+            
+            
+    elif i== list_All_SLA[3]: #"AMS-SL-04"
+        if "AMS-SL-04" in df4:
+            df9_04=df_AMS_INC[(df_AMS_INC['Assignment group']=="TS-GLOB-L2-R&D CLINICAL") & (df_AMS_INC['Metal']=="Silver") & (df_AMS_INC['Resolution SLA']=="Not met")]
+            df9_04["Comments"]=""
+            df9_04.insert(loc=1, column='Date', value=df_date)
+            df09_04=Sheet_AMS_SL_04.drop_duplicates(subset ="Date")
+            df09_04=df09_04['Date']
+            Date_04=[]
+            if (df9_04.empty) or (df9_04.empty and df09_04.empty):
+                Sheet_AMS_SL_04.to_excel(writer, sheet_name='AMS-SL-04')
+            elif (df9_04.empty==False and df09_04.empty):
+                print("Master file empty_ but current file have data-SL-04")
+                df9_04.to_excel(writer,sheet_name='AMS-SL-04')    
+            else:
+                for d in df09_04:
+                    df_date4=pd.to_datetime(d)
+                    Date_04.append(df_date4)
+                if df_date not in Date_04:
+                       print("fall")
+                       df_AMS_SL_04_Value=Sheet_AMS_SL_04.append(df9_04,ignore_index = True,sort=False)   
+                       df_AMS_SL_04_Value.to_excel(writer, sheet_name='AMS-SL-04')#***Append_with latest_values**
+                       print("OK4")
+                else:
+                       print("Date. present")
+                       Sheet_AMS_SL_04.to_excel(writer, sheet_name='AMS-SL-04')#**** Store Previous Data "AMS-SL-04"
+                    
+        else:
+            Sheet_AMS_SL_04.to_excel(writer, sheet_name='AMS-SL-04')#**** Store Previous Data "AMS-SL-04"    
+            
+            
+            
+            
+    elif i== list_All_SLA[4]: #"AMS-SL-05"
+        if "AMS-SL-05" in df4:
+            df9_05=df_AMS_INC[(df_AMS_INC['Assignment group']=="TS-GLOB-L2-R&D CLINICAL") & (df_AMS_INC['Backlog (resolved)?']=="Yes") & (df_AMS_INC['Resolution SLA']=="Not met")]
+            df9_05["Comments"]=""
+            df9_05.insert(loc=1, column='Date', value=df_date)
+            df09_05=Sheet_AMS_SL_05.drop_duplicates(subset ="Date")
+            df09_05=df09_05['Date']
+            Date_05=[]
+            if (df9_05.empty):
+                print("Empty")
+                Sheet_AMS_SL_05.to_excel(writer, sheet_name='AMS-SL-05')
+            elif (df9_05.empty==False and df09_05.empty):
+                print("Master file empty_ but current file have data-SL-05")
+                df9_05.to_excel(writer,sheet_name='AMS-SL-05')
+            else:    
+                print("fall")
+                for e in df09_05:
+                    df_date5=pd.to_datetime(e)
+                    Date_05.append(df_date5)
+                if df_date not in Date_05:
+                    print("fall")
+                    df_AMS_SL_05_Value=Sheet_AMS_SL_05.append(df9_05,ignore_index = True,sort=False)
+                    df_AMS_SL_05_Value.to_excel(writer, sheet_name='AMS-SL-05')#***Append_with latest_values**
+                    print("OK5")
+                else:
+                    print("Date. present")
+                    Sheet_AMS_SL_05.to_excel(writer, sheet_name='AMS-SL-05')#**** Store Previous Data "AMS-SL-05"   
+                    
+        else:
+            Sheet_AMS_SL_05.to_excel(writer, sheet_name='AMS-SL-05')#**** Store Previous Data "AMS-SL-05"   
+            
+            
+            
+            
+    elif i== list_All_SLA[5]: #"AMS-SL-07"
+        if "AMS-SL-07" in df4:
+            df9_07=df_STD_and_Non_STD[(df_STD_and_Non_STD['RITM state']=="Closed Complete") & (df_STD_and_Non_STD['Standard / Non-Standard']=="Non-Standard") & (df_STD_and_Non_STD['STD / Non-STD SLA']=="Not met")]
+            df9_07["Comments"]=""
+            df9_07.insert(loc=1, column='Date', value=df_date)
+            df09_07=Sheet_AMS_SL_07.drop_duplicates(subset ="Date")
+            df09_07=df09_07['Date']
+            Date_07=[]
+            if (df9_07.empty) or (df09_07.empty and df9_07.empty):
+                Sheet_AMS_SL_07.to_excel(writer, sheet_name='AMS-SL-07')  
+            elif (df9_07.empty==False and df09_07.empty):
+                df9_07.set_index('number',inplace=True)
+                print("Master file empty_ but current file have data-SL-07")
+                df9_07.to_excel(writer,sheet_name='AMS-SL-07')    
+            else:    
+                for g in df09_07:
+                    df_date7=pd.to_datetime(g)
+                    Date_07.append(df_date7)
+                if df_date not in Date_07:
+                    df_AMS_SL_07_Value=Sheet_AMS_SL_07.append(df9_07,ignore_index = True,sort=False)
+                    df_AMS_SL_07_Value.to_excel(writer, sheet_name='AMS-SL-07')#***Append_with latest_values**
+                else:
+                    Sheet_AMS_SL_07.to_excel(writer, sheet_name='AMS-SL-07')#**** Store Previous Data "AMS-SL-07"          
+                      
+        else:
+            Sheet_AMS_SL_07.to_excel(writer, sheet_name='AMS-SL-07')#**** Store Previous Data "AMS-SL-07"
+            
+            
+            
+            
+    elif i== list_All_SLA[6]: #"AMS-SL-09"
+        if "AMS-SL-09" in df4:
+            df9_09=df_STD_and_Non_STD[(df_STD_and_Non_STD['RITM state']=="Closed Complete") & (df_STD_and_Non_STD['Standard / Non-Standard']=="Non-Standard") & (df_STD_and_Non_STD['GSC']=="Clinical")& (df_STD_and_Non_STD['Non-STD SLA']=="Not met")]
+            df9_09["Comments"]=""
+            df9_09.insert(loc=1, column='Date', value=df_date)
+            df09_09=Sheet_AMS_SL_09.drop_duplicates(subset ="Date")
+            df09_09=df09_09['Date']
+            Date_09=[]
+            if (df9_09.empty) or (df9_09.empty and df09_09.empty):
+                Sheet_AMS_SL_09.to_excel(writer, sheet_name='AMS-SL-09')
+            elif (df9_09.empty==False and df09_09.empty):
+                df9_09.set_index('number',inplace=True)
+                print("Master file empty_ but current file have data-SL-09")
+                df9_09.to_excel(writer,sheet_name='AMS-SL-09')    
+            else:
+                for j in df09_09:
+                    df_date9=pd.to_datetime(j)
+                    Date_09.append(df_date9)
+                if df_date not in Date_09:
+                    df_AMS_SL_09_Value=Sheet_AMS_SL_09.append(df9_09,ignore_index = True,sort=False)
+                    df_AMS_SL_09_Value.to_excel(writer, sheet_name='AMS-SL-09')#***Append_with latest_values**
+                else:
+                    Sheet_AMS_SL_09.to_excel(writer, sheet_name='AMS-SL-09')#**** Store Previous Data "AMS-SL-09"    
+            
+        else:
+            Sheet_AMS_SL_09.to_excel(writer, sheet_name='AMS-SL-09')#**** Store Previous Data "AMS-SL-09"
+            
+            
+            
+            
+    elif i== list_All_SLA[7]: #"AMS-SL-12"
+        if "AMS-SL-12" in df4:
+            df9_12=df_STD_and_Non_STD[(df_STD_and_Non_STD['RITM state'].isin(["Open","Work in Progress"])) & (df_STD_and_Non_STD['Prior to Go Live?'] !="Yes") & (df_STD_and_Non_STD['Business days Open based on due date - Aging'].isin(["10d-15d","15d-30d","30d-60d","> 60d"]))& (df_STD_and_Non_STD['GSC']=="Clinical") & (df_STD_and_Non_STD['Non-STD SLA']=="Not met")] 
+            df9_12["Comments"]=""
+            df9_12.insert(loc=1, column='Date', value=df_date)
+            df09_12=Sheet_AMS_SL_12.drop_duplicates(subset ="Date")
+            df09_12=df09_12['Date']
+            Date_12=[]
+            if (df9_12.empty) or (df9_12.empty and df09_12.empty):
+                df9_12.set_index('number',inplace=True)
+                Sheet_AMS_SL_12.to_excel(writer, sheet_name='AMS-SL-12')
+            elif (df9_12.empty==False and df09_12.empty):
+                print("Master file empty_ but current file have data-SL-12")
+                df9_12.to_excel(writer,sheet_name='AMS-SL-12')    
+            else:    
+                for m in df09_12:
+                    df_date12=pd.to_datetime(m)
+                    Date_12.append(df_date12)
+                if df_date not in Date_12:
+                    df_AMS_SL_12_Value=Sheet_AMS_SL_12.append(df9_12,ignore_index = True,sort=False)
+                    df_AMS_SL_12_Value.to_excel(writer, sheet_name='AMS-SL-12')#***Append_with latest_values**
+                else:
+                    Sheet_AMS_SL_12.to_excel(writer, sheet_name='AMS-SL-12')#**** Store Previous Data "AMS-SL-12"        
+
+        else:
+           
+            Sheet_AMS_SL_12.to_excel(writer, sheet_name='AMS-SL-12')#**** Store Previous Data "AMS-SL-12"    
+
+
+writer.save()
