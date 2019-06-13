@@ -1,0 +1,14 @@
+
+import pandas as pd
+#import matplotlib.pyplot as plt
+
+df=pd.read_excel('D:\python\image\print.xlsx',sheet_name="B_1")
+df1=pd.read_excel('D:\python\image\print1.xlsx',sheet_name="C_1")
+a=[]
+for i in df["A"]:
+    for j in df1["A"]:
+        if j == i:
+            print(j)
+            df.drop(df.loc[df['A']==j].index, inplace=True)
+for k in a:
+    df_drop=df1.drop(df1.A[k])
