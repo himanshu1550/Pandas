@@ -1,0 +1,27 @@
+from itertools import combinations 
+total=17
+val=[2,5,6,8]
+c=[]
+for i in range(2,len(val)+1):
+    c.append(list(combinations(val,i)))
+
+value=[]
+for j in c:
+    for k in j:
+        value.append(k)
+
+print(value)
+result=[]
+for a in value:
+    suma=0
+    for b in a:
+        suma+=b
+    result.append([suma,a])
+
+print((result))
+while 
+for call in range(len(result)):
+    if total-result[call][0] in val:
+        print(result[call
+    
+    
